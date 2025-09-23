@@ -123,7 +123,12 @@ const INITIAL_FORM_SECTIONS: (Omit<AssessmentSection, 'items'> & { items: { id: 
 //================================================================
 
 //--- Modal (from components/Modal.tsx) ---
-const Modal: React.FC<{ isOpen: boolean; onClose: () => void; children: React.ReactNode; }> = ({ isOpen, onClose, children }) => {
+type ModalProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+};
+const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -174,7 +179,12 @@ const Modal: React.FC<{ isOpen: boolean; onClose: () => void; children: React.Re
 
 
 //--- ImageInput (from components/ImageInput.tsx) ---
-const ImageInput: React.FC<{ file: File | null; onChange: (file: File | null) => void; onThumbnailClick?: (file: File) => void; }> = ({ file, onChange, onThumbnailClick }) => {
+type ImageInputProps = {
+  file: File | null;
+  onChange: (file: File | null) => void;
+  onThumbnailClick?: (file: File) => void;
+};
+const ImageInput: React.FC<ImageInputProps> = ({ file, onChange, onThumbnailClick }) => {
   const [preview, setPreview] = useState<string | null>(null);
   const [isDraggingOver, setIsDraggingOver] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -291,7 +301,7 @@ const ImageInput: React.FC<{ file: File | null; onChange: (file: File | null) =>
 };
 
 //--- ItemInstanceRow (from components/ItemInstanceRow.tsx) ---
-const ItemInstanceRow: React.FC<{
+type ItemInstanceRowProps = {
   item: AssessmentItem;
   instance: AssessmentItemInstance;
   sectionIndex: number;
@@ -302,7 +312,8 @@ const ItemInstanceRow: React.FC<{
   onDescriptionChange: (sectionIndex: number, itemIndex: number, instanceIndex: number, description: string) => void;
   onPhotoChange: (sectionIndex: number, itemIndex: number, instanceIndex: number, photo: File | null) => void;
   onRemove: (sectionIndex: number, itemIndex: number, instanceIndex: number) => void;
-}> = ({
+};
+const ItemInstanceRow: React.FC<ItemInstanceRowProps> = ({
   item,
   instance,
   sectionIndex,
@@ -440,7 +451,7 @@ const ItemInstanceRow: React.FC<{
 };
 
 //--- AssessmentItemRow (from components/AssessmentItemRow.tsx) ---
-const AssessmentItemRow: React.FC<{
+type AssessmentItemRowProps = {
   item: AssessmentItem;
   sectionIndex: number;
   itemIndex: number;
@@ -450,7 +461,8 @@ const AssessmentItemRow: React.FC<{
   onAddItemInstance: (sectionIndex: number, itemIndex: number) => void;
   onRemoveItemInstance: (sectionIndex: number, itemIndex: number, instanceIndex: number) => void;
   validationErrors: string[];
-}> = ({
+};
+const AssessmentItemRow: React.FC<AssessmentItemRowProps> = ({
   item,
   sectionIndex,
   itemIndex,
@@ -503,7 +515,11 @@ const AssessmentItemRow: React.FC<{
 
 
 //--- FollowUpSection (from components/FollowUpSection.tsx) ---
-const FollowUpSection: React.FC<{ data: FollowUpData; onChange: (field: keyof FollowUpData, value: string) => void; }> = ({ data, onChange }) => {
+type FollowUpSectionProps = {
+  data: FollowUpData;
+  onChange: (field: keyof FollowUpData, value: string) => void;
+};
+const FollowUpSection: React.FC<FollowUpSectionProps> = ({ data, onChange }) => {
   return (
     <div className="mt-8 bg-white p-4 sm:p-6 rounded-2xl shadow-lg">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">7. Notes & Follow-Up</h2>
@@ -567,7 +583,12 @@ const FollowUpSection: React.FC<{ data: FollowUpData; onChange: (field: keyof Fo
 };
 
 //--- SummaryDashboard (from components/SummaryDashboard.tsx) ---
-const SummaryDashboard: React.FC<{ sections: AssessmentSection[]; filterOn: boolean; onFilterToggle: (value: boolean) => void; }> = ({ sections, filterOn, onFilterToggle }) => {
+type SummaryDashboardProps = {
+  sections: AssessmentSection[];
+  filterOn: boolean;
+  onFilterToggle: (value: boolean) => void;
+};
+const SummaryDashboard: React.FC<SummaryDashboardProps> = ({ sections, filterOn, onFilterToggle }) => {
   const stats = useMemo(() => {
     let ok = 0;
     let notOk = 0;
@@ -652,7 +673,7 @@ const SummaryDashboard: React.FC<{ sections: AssessmentSection[]; filterOn: bool
 
 
 //--- AssessmentSectionComponent (from components/AssessmentSection.tsx) ---
-const AssessmentSectionComponent: React.FC<{
+type AssessmentSectionComponentProps = {
   section: AssessmentSection;
   sectionIndex: number;
   isOpen: boolean;
@@ -663,7 +684,8 @@ const AssessmentSectionComponent: React.FC<{
   onAddItemInstance: (sectionIndex: number, itemIndex: number) => void;
   onRemoveItemInstance: (sectionIndex: number, itemIndex: number, instanceIndex: number) => void;
   validationErrors: string[];
-}> = ({
+};
+const AssessmentSectionComponent: React.FC<AssessmentSectionComponentProps> = ({
   section,
   sectionIndex,
   isOpen,
@@ -721,7 +743,11 @@ const AssessmentSectionComponent: React.FC<{
 };
 
 //--- FormHeader (from components/FormHeader.tsx) ---
-const FormHeader: React.FC<{ data: HeaderData; onChange: (field: keyof HeaderData, value: string) => void; }> = ({ data, onChange }) => {
+type FormHeaderProps = {
+  data: HeaderData;
+  onChange: (field: keyof HeaderData, value: string) => void;
+};
+const FormHeader: React.FC<FormHeaderProps> = ({ data, onChange }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 border-t border-gray-200 pt-6">
       <div>
