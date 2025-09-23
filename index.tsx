@@ -288,6 +288,7 @@ const ImageInput: React.FC<ImageInputProps> = ({ file, onChange, onThumbnailClic
           <button
             type="button"
             onClick={handleRemoveImage}
+            aria-label="Remove image"
             className="absolute top-1 right-1 bg-red-600 text-white rounded-full p-1 leading-none hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -517,7 +518,7 @@ const AssessmentItemRow: React.FC<AssessmentItemRowProps> = ({
 //--- FollowUpSection (from components/FollowUpSection.tsx) ---
 type FollowUpSectionProps = {
   data: FollowUpData;
-  onChange: (field: keyof FollowUpData, value: string) => void;
+  onChange: (field: 'summary' | 'recommendations' | 'personInCharge' | 'targetDate', value: string) => void;
 };
 const FollowUpSection: React.FC<FollowUpSectionProps> = ({ data, onChange }) => {
   return (
@@ -745,7 +746,7 @@ const AssessmentSectionComponent: React.FC<AssessmentSectionComponentProps> = ({
 //--- FormHeader (from components/FormHeader.tsx) ---
 type FormHeaderProps = {
   data: HeaderData;
-  onChange: (field: keyof HeaderData, value: string) => void;
+  onChange: (field: 'assessmentDate' | 'areaLocation' | 'assessorName', value: string) => void;
 };
 const FormHeader: React.FC<FormHeaderProps> = ({ data, onChange }) => {
   return (
@@ -896,7 +897,7 @@ const App: React.FC = () => {
   }, [formData.sections, openSectionIndex]);
 
 
-  const handleHeaderChange = useCallback((field: keyof FormData['header'], value: string) => {
+  const handleHeaderChange = useCallback((field: 'assessmentDate' | 'areaLocation' | 'assessorName', value: string) => {
     setFormData(prev => ({
       ...prev,
       header: { ...prev.header, [field]: value },
@@ -1046,7 +1047,7 @@ const App: React.FC = () => {
     });
   }, []);
 
-  const handleFollowUpChange = useCallback((field: keyof FormData['followUp'], value: string) => {
+  const handleFollowUpChange = useCallback((field: 'summary' | 'recommendations' | 'personInCharge' | 'targetDate', value: string) => {
     setFormData(prev => ({
       ...prev,
       followUp: { ...prev.followUp, [field]: value },
